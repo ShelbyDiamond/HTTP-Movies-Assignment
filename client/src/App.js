@@ -7,17 +7,6 @@ import Movie from "./Movies/Movie"
 const App = () => {
   const [savedList, setSavedList] = useState([])
 
- const updatedMovies = update => {
-    axios
-      .put("http://localhost:5000/update-movie/${id}")
-      .then(response => {
-        return console.log(response.update)
-      })
-      .catch(error => {
-        console.log("I am broken!", error)
-      })
-  })
-}
   const addToSavedList = movie => {
     setSavedList([...savedList, movie])
   }

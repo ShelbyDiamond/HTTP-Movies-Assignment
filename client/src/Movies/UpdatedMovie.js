@@ -9,7 +9,7 @@ const NewObject = {
 }
 
 const UpdatedMovie = () => {
-  const [newMovie, setNewMovie] = useState(UpdatedMovie)
+  const [movie, setMovie] = useState(UpdatedMovie)
 
   useEffect(() => {
     const id = props.match.params.id
@@ -19,13 +19,23 @@ const UpdatedMovie = () => {
 
   const changeHandler = event => {
     event.preventDefault()[event.target.name], event.target.value
-    // event.persist()
-    // let value = event.target.value;
-    // if(event.target.name=== "movie")
-    // value =parseInt(value)
+    let newMovie = event.target.name
+    if (event.target.name === "movie") newMovie = parseInt(data, ...data)
   }
 
-  setNewMovie({ ...movie, [event.target.name]: value })
+  setMovie({ ...movie, [event.target.name]: value })
+
+  const handleSubmit = update => {
+    axios
+      .put("http://localhost:5000/update-movie/${id}")
+      .then(response => {
+        return console.log(response.update)
+      })
+      .catch(error => {
+        console.log("I am broken!", error)
+      })
+  }
+
   return (
     <div>
       <form>
