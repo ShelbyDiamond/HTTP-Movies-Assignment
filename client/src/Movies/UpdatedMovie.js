@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-const NewObject = {
+const newObject = {
   id: 1,
   title: "",
   director: "",
@@ -18,18 +18,22 @@ const UpdatedMovie = () => {
   })
 
   const changeHandler = event => {
-    event.preventDefault()[event.target.name], event.target.value
+    event.persist()[event.target.name], event.target.value
     let newMovie = event.target.name
     if (event.target.name === "movie") newMovie = parseInt(data, ...data)
   }
 
   setMovie({ ...movie, [event.target.name]: value })
 
-  const handleSubmit = update => {
+  const handleSubmit = event => {
+    event.preventDefault()
     axios
-      .put("http://localhost:5000/update-movie/${id}")
+      .put(`http://localhost:5000/update-movie/${id}`)
       .then(response => {
-        return console.log(response.update)
+        console.log(response)
+        setMovie(newObject)
+        props.updateItem(response.data)
+        props.history.push("/update-movie")
       })
       .catch(error => {
         console.log("I am broken!", error)
@@ -38,7 +42,7 @@ const UpdatedMovie = () => {
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="movie"
